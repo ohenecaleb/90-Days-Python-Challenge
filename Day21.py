@@ -1,30 +1,20 @@
-import socket
+import os
+import shutil
 
-def is_port_open(host, port):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.settimeout(1)
-    try:
-        s.connect((host, port))
-    except (socket.timeout, socket.error):
-        return False
-    else:
-        return True
-    finally:
-        s.close()
+def organize_files_by_extension(folder_path):
+    if not os.path.isdir(folder_path):
+        print(f"The folder path {folder_path} does not exist.")
+        return
 
-def scan_ports(host, ports):
-    open_ports = []
-    for port in ports:
-        if is_port_open(host, port):
-            open_ports.append(port)
-    return open_ports
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        if os.path.isfile(file_path):
+            file_extension = filename.split('.')[-1]
+            destination_folder = os.path.join(folder_path, file_extension + "Files")
+            if not os.path.exists(destination_folder):
+                os.makedirs(destination_folder)
+            shutil.move(file_path, os.path.join(destination_folder, filename))
 
 if __name__ == "__main__":
-    target_host = "example.com"  # Replace with the target host
-    target_ports = [22, 80, 443]  # Replace with the list of ports you want to scan
-
-    open_ports = scan_ports(target_host, target_ports)
-    if open_ports:
-        print(f"Open ports on {target_host}: {open_ports}")
-    else:
-        print(f"No open ports found on {target_host}")
+    folder_path = input("Enter the path of the folder to organize: ")
+    organize_files_by_extension(folder_path)
