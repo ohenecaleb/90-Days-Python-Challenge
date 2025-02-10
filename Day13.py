@@ -19,6 +19,8 @@ def get_weather(api_key, city):
         print("Error fetching data from OpenWeatherMap API")
 
 if __name__ == "__main__":
-    api_key = "your_api_key_here"  # Replace with your OpenWeatherMap API key
+    api_key = "fd9b6bdf315085a3cec8f87f4ddd1779"  # Replace with your OpenWeatherMap API key, sign up on openweather to get your apikey
     city = "London"  # Replace with the city you want to fetch the weather for
     get_weather(api_key, city)
+
+#Code by Ohene Caleb
