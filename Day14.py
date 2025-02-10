@@ -24,3 +24,5 @@ if __name__ == "__main__":
         print(f"Following: {user_profile['following']}")
     else:
         print("User not found or an error occurred.")
+
+#Code by Ohene Caleb
