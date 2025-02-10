@@ -12,14 +12,13 @@ def get_weather(api_key, city):
     
     if response.status_code == 200:
         data = response.json()
-        main = data['main']
-        weather = data['weather'][0]
-        temp = main['temp']
-        description = weather['description']
+        temperature = data['main']['temp'] #Refer to Nested dictionary for more understanding
+        weather = data['weather'][0]['description']#Refer to Nested dictionary for more understanding
+        
     
         print(f"City: {city}")
-        print(f"Temperature: {temp}°C")
-        print(f"Weather: {description}")
+        print(f"Temperature: {temperature}°C")
+        print(f"Weather: {weather}")
     else:
         print("Error fetching data from OpenWeatherMap API")
         print(f"Response Content: {response.text}")
